@@ -16,6 +16,7 @@ function ExtensionList({ isLight, filter }: ExtensionsProps) {
 
     useEffect(() => {
         jsonFetch(`${import.meta.env.BASE_URL}data.json`).then(data => setData(data));
+        console.log(`${import.meta.env.BASE_URL}data.json`);
 
 
         function handleResize() {
