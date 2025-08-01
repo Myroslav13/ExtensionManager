@@ -13,23 +13,32 @@ function App() {
       }
   }
 
+  let classNameString = "w-100 navbar navbar-expand-lg rounded-4";
+  let classNameDivMain = "mainDiv";
+
+  if(lightState === true) {
+    classNameString = "w-100 navbar navbar-expand-lg rounded-4 border lightVersion";
+    classNameDivMain = "mainDiv lightVersion";
+  }
+
   return (
-    <>
-     <nav className="mt-1 w-100 navbar navbar-expand-lg rounded-3">
+    <div className={classNameDivMain}>
+     <nav className={classNameString}>
           <div className="container-fluid">
               <a className="navbar-brand" href="#">
-                  <img src="assets/images/logo.svg" alt="logo" width="200"/>
+                  <img src={lightState === true ? "assets/images/logo.svg":"assets/images/logo-white.png"} alt="logo" width="200"/>
               </a>
               {lightState === true ?
-                  <button type="button" className="myBtn myBtnSun" onClick={handleClick}><i className="bi bi-sun"></i></button>:
-                  <button type="button" className="myBtn myBtnSun" onClick={handleClick}><i className="bi bi-moon"></i></button>
+                  <button type="button" className="myBtn myBtnSun lightVersion" onClick={handleClick}><i className="bi bi-moon"></i></button>:
+                  <button type="button" className="myBtn myBtnSun" onClick={handleClick}><i className="bi bi-sun"></i></button>
               }
               
           </div>
       </nav>
+
       <Extensions isLight={lightState}></Extensions>
       <ExtensionList isLight={lightState}></ExtensionList>
-    </>
+    </div>
   );
 }
 

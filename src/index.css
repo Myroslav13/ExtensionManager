@@ -23,22 +23,6 @@ a:hover {
   color: #535bf2;
 }
 
-html {
-  background: linear-gradient(#04091c, #0a1640);
-}
-
-body {
-  background: linear-gradient(#04091c, #0a1640);
-  padding: 0px 200px;
-  margin: 0;
-}
-
-@media (max-width: 1000px) {
-  body {
-    padding: 0px 40px;
-  }
-}
-
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
@@ -80,6 +64,10 @@ button:focus-visible {
   background-color: #1f2535;
 }
 
+.navbar.lightVersion, .card.lightVersion{
+  background-color: white;
+}
+
 a {
   cursor: default;
 }
@@ -96,9 +84,21 @@ button {
   font-size: small;
 }
 
+button.lightVersion {
+  color: #222836;
+  background-color: white;
+  border: 1px solid gray;
+}
+
 button:hover {
   background-color: #f35c55;
   color: #222836;
+  border: 1px solid transparent
+}
+
+button.lightVersion:hover {
+  background-color: red;
+  color: white;
   border: 1px solid transparent
 }
 
@@ -107,9 +107,18 @@ p{
   margin-bottom: 0;
 }
 
+p.lightVersion{
+  color: gray;
+}
+
 .form-switch .form-check-input:checked {
   background-color: #f35c55;
   border-color: #f35c55;
+}
+
+.form-switch .form-check-input.lightVersion:checked {
+  background-color: red;
+  border-color: red;
 }
 
 .myBtn { 
@@ -125,6 +134,12 @@ p{
   width: 40px;
 }
 
+.myBtn.lightVersion {
+  background-color: #eeeeec;
+  color: #222836;
+  border: 1px solid transparent;
+}
+
 .myBtnRow {
   border-radius: 20px;
 }
@@ -138,4 +153,19 @@ p{
   background-color: gray;
   color: white;
   border: none;
+}
+
+h1.lightVersion {
+  color: #04113b;
+}
+
+.mainDiv {
+  background: linear-gradient(#04091c, #0a1640);
+  width: 100%;
+  padding: 25px 200px 0px 200px;
+  margin: 0;
+}
+
+.mainDiv.lightVersion {
+  background: #ebf4fb;
 }

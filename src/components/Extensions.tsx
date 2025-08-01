@@ -1,30 +1,44 @@
+import { useEffect, useState } from "react";
+
 interface ExtensionsProps {
   isLight: boolean;
 }
 
 function Extensions({ isLight }: ExtensionsProps) {
-    return (
-        <div className="d-flex justify-content-between mt-5 mb-4">
-        {
-            isLight === true ?
-            <>
-                <h1 className="text-white fs-2">Extensions List</h1>
-                <div className="d-flex gap-3">
-                    <button type="button" className="myBtn myBtnRow active">All</button>
-                    <button type="button" className="myBtn myBtnRow">Active</button>
-                    <button type="button" className="myBtn myBtnRow">Inactive</button>
-                </div>
-            </>
-            :
-            <>
-                <h1 className="fs-2" style={{color: "#2f354b"}}>Extensions List</h1>
-                <div className="d-flex gap-3">
-                    <button type="button" className="myBtn myBtnRow active">All</button>
-                    <button type="button" className="myBtn myBtnRow">Active</button>
-                    <button type="button" className="myBtn myBtnRow">Inactive</button>
-                </div>
-            </>
+    let classNameButtonActive = "myBtn myBtnRow active";
+    let classNameButton = "myBtn myBtnRow";
+    let classNameH1 = "text-white fs-2";
+
+    if(isLight === true) {
+        classNameButtonActive = "myBtn myBtnRow active lightVersion";
+        classNameButton = "myBtn myBtnRow lightVersion";    
+        classNameH1 = "fs-2 lightVersion";
+    }
+
+    const [windowSize, setWindowSize] = useState(window.innerWidth);
+    
+    useEffect(() => {
+        function handleResize() {
+            setWindowSize(window.innerWidth);
         }
+
+        window.addEventListener("resize", handleResize);
+    }, []);
+
+    let classNameDiv = "d-flex justify-content-between mt-5 mb-4";
+
+    if(windowSize < 768) {
+        classNameDiv = "d-flex justify-content-center align-items-center flex-column my-4";
+    }
+
+    return (
+        <div className={classNameDiv}>
+            <h1 className={classNameH1}>Extensions List</h1>
+            <div className="d-flex gap-3">
+                <button type="button" className={classNameButtonActive}>All</button>
+                <button type="button" className={classNameButton}>Active</button>
+                <button type="button" className={classNameButton}>Inactive</button>
+            </div>
         </div>
     );
 }
