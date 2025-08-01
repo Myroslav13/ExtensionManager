@@ -33,7 +33,7 @@ function ExtensionList({ isLight, filter }: ExtensionsProps) {
     // Toggle click handling
     function handleToggleClick(index:number, prevState:boolean) {
         setData(prevData => {
-            const newData = [... prevData];
+            const newData = [...prevData];
             newData[index].isActive = !prevState;
 
             return newData;
