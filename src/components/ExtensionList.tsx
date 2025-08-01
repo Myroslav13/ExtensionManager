@@ -15,9 +15,7 @@ function ExtensionList({ isLight, filter }: ExtensionsProps) {
     const [windowSize, setWindowSize] = useState(window.innerWidth);
 
     useEffect(() => {
-        jsonFetch(`${import.meta.env.BASE_URL}data.json`).then(data => setData(data));
-        console.log(`${import.meta.env.BASE_URL}data.json`);
-
+        jsonFetch("./data.json").then(data => setData(data));
 
         function handleResize() {
             setWindowSize(window.innerWidth);
