@@ -7,9 +7,10 @@ async function jsonFetch(file: string) {
 
 interface ExtensionsProps {
   isLight: boolean;
+  filter: "all" | "active" | "inactive";
 }
 
-function ExtensionList({ isLight }: ExtensionsProps) {
+function ExtensionList({ isLight, filter }: ExtensionsProps) {
     const [data, setData] = useState<any[]>([]);
     const [windowSize, setWindowSize] = useState(window.innerWidth);
 
@@ -28,6 +29,7 @@ function ExtensionList({ isLight }: ExtensionsProps) {
     let classNameToggle = "form-check-input";
     let classNameP = "";
     let classNameRemoveButton = "";
+    let counter = -1;
 
     if(isLight === true) {
         classNameString = "card h-100 rounded-4 border lightVersion";
@@ -40,13 +42,19 @@ function ExtensionList({ isLight }: ExtensionsProps) {
         <div className="container text-center mt-2">
             <div className="row">
                 {data.map((el, index) => { 
-                    let marginClass = "me-2";
+                    let marginClass = "me-2"; 
+                    
+                    // Checking display filter
+                    if (!(((filter === "active") && el.isActive) || ((filter === "inactive") && !el.isActive) || (filter === "all"))) return null;
+                    
+                    counter++;
 
-                    if (((index + 1) % 3 === 0) && (window.innerWidth > 999)) marginClass = "";
+                    // Checking window width
+                    if (((counter + 1) % 3 === 0) && (window.innerWidth > 999)) marginClass = "";
 
-                    if (((index + 1) % 2 === 0) && ((window.innerWidth > 768) && (window.innerWidth <= 999))) marginClass = "";
+                    if (((counter + 1) % 2 === 0) && ((window.innerWidth > 768) && (window.innerWidth <= 999))) marginClass = "";
 
-                    if (window.innerWidth < 768) marginClass = "";       
+                    if (window.innerWidth < 768) marginClass = "";      
                     
                     return (
                     <div key={index} className={"col-md-6 col-lg-4 mb-3 p-0"}>
@@ -62,7 +70,7 @@ function ExtensionList({ isLight }: ExtensionsProps) {
                                 <button type="button" className={classNameRemoveButton}>Remove</button>
 
                                 <div className="form-check form-switch">
-                                    <input className={classNameToggle} type="checkbox" id="flexSwitchCheckDefault"/>
+                                    <input className={classNameToggle} type="checkbox" id="flexSwitchCheckDefault" defaultChecked={el.isActive}/>
                                 </div>
                             </div>
                         </div>

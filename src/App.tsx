@@ -4,6 +4,7 @@ import { useState } from "react";
 
 function App() {
   const [lightState, setLightState] = useState(false);
+  const [filter, setFilter] = useState<"all" | "active" | "inactive">("all");
 
   function handleClick() {
       if(lightState === false) {
@@ -36,8 +37,8 @@ function App() {
           </div>
       </nav>
 
-      <Extensions isLight={lightState}></Extensions>
-      <ExtensionList isLight={lightState}></ExtensionList>
+      <Extensions isLight={lightState} filter={filter} setFilter={setFilter}></Extensions>
+      <ExtensionList isLight={lightState} filter={filter}></ExtensionList>
     </div>
   );
 }
