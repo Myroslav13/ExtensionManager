@@ -23,12 +23,20 @@ a:hover {
   color: #535bf2;
 }
 
+html {
+  background: linear-gradient(#04091c, #0a1640);
+}
+
 body {
+  background: linear-gradient(#04091c, #0a1640);
+  padding: 0px 200px;
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+}
+
+@media (max-width: 1000px) {
+  body {
+    padding: 0px 40px;
+  }
 }
 
 h1 {
@@ -66,4 +74,68 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.card, .navbar {
+  background-color: #1f2535;
+}
+
+a {
+  cursor: default;
+}
+
+.form-check-input {
+  cursor: pointer;
+}
+
+button {
+  background-color: #222836;
+  color: white;
+  border: 1px solid gray;
+  border-radius: 25px;
+  font-size: small;
+}
+
+button:hover {
+  background-color: #f35c55;
+  color: #222836;
+  border: 1px solid transparent
+}
+
+p{
+  color: lightgray;
+  margin-bottom: 0;
+}
+
+.form-switch .form-check-input:checked {
+  background-color: #f35c55;
+  border-color: #f35c55;
+}
+
+.myBtn { 
+  display: flex;
+  border: none;
+  border-radius: 5px;
+  background-color: #2f354b;
+  justify-content: center;
+  align-items: center;
+}
+
+.myBtnSun {
+  width: 40px;
+}
+
+.myBtnRow {
+  border-radius: 20px;
+}
+
+.myBtnRow.active {
+  background-color: #f35c55;
+  color: #2f354b;
+}
+
+.myBtn:hover {
+  background-color: gray;
+  color: white;
+  border: none;
 }
