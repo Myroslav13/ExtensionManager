@@ -25,6 +25,22 @@ function ExtensionList({ isLight, filter }: ExtensionsProps) {
     }, 
     []);
 
+    // Remove click handling
+    function handleRemoveClick(index: number) {
+        setData(prevData => prevData.filter((_, i) => i !== index));
+    }
+
+    // Toggle click handling
+    function handleToggleClick(index:number, prevState:boolean) {
+        setData(prevData => {
+            const newData = [... prevData];
+            newData[index].isActive = !prevState;
+
+            return newData;
+        });
+    }
+
+    // Default class values
     let classNameString = "card h-100 rounded-4 border text-white";
     let classNameToggle = "form-check-input";
     let classNameP = "";
@@ -57,25 +73,25 @@ function ExtensionList({ isLight, filter }: ExtensionsProps) {
                     if (window.innerWidth < 768) marginClass = "";      
                     
                     return (
-                    <div key={index} className={"col-md-6 col-lg-4 mb-3 p-0"}>
-                        <div className={`${classNameString} ${marginClass}`}>
-                            <div className="d-flex align-items-start p-3">
-                                <img src={el.logo} className="card-img-top w-25" alt="logo" />
-                                <div className="card-body text-start pt-0">
-                                    <h5 className="card-title">{el.name}</h5>
-                                    <p className={classNameP}>{el.description}</p>
+                        <div key={index} className={"col-md-6 col-lg-4 mb-3 p-0"}>
+                            <div className={`${classNameString} ${marginClass}`}>
+                                <div className="d-flex align-items-start p-3">
+                                    <img src={el.logo} className="card-img-top w-25" alt="logo" />
+                                    <div className="card-body text-start pt-0">
+                                        <h5 className="card-title">{el.name}</h5>
+                                        <p className={classNameP}>{el.description}</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="card-footer bg-transparent border-0 mt-auto d-flex align-items-center justify-content-between pb-3">   
-                                <button type="button" className={classNameRemoveButton}>Remove</button>
+                                <div className="card-footer bg-transparent border-0 mt-auto d-flex align-items-center justify-content-between pb-3">   
+                                    <button type="button" className={classNameRemoveButton} onClick={() => handleRemoveClick(index)}>Remove</button>
 
-                                <div className="form-check form-switch">
-                                    <input className={classNameToggle} type="checkbox" id="flexSwitchCheckDefault" defaultChecked={el.isActive}/>
+                                    <div className="form-check form-switch">
+                                        <input className={classNameToggle} type="checkbox" id="flexSwitchCheckDefault" defaultChecked={el.isActive} onClick={() => handleToggleClick(index, el.isActive)}/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                );
+                    );
                 })}
             </div>
         </div>

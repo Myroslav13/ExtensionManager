@@ -6,6 +6,7 @@ function App() {
   const [lightState, setLightState] = useState(false);
   const [filter, setFilter] = useState<"all" | "active" | "inactive">("all");
 
+  // Light state changing
   function handleClick() {
       if(lightState === false) {
           setLightState(true);
@@ -14,6 +15,7 @@ function App() {
       }
   }
 
+  // Default class values
   let classNameString = "w-100 navbar navbar-expand-lg rounded-4";
   let classNameDivMain = "mainDiv";
 

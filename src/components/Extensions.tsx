@@ -7,20 +7,6 @@ interface ExtensionsProps {
 }
 
 function Extensions({ isLight, filter, setFilter }: ExtensionsProps) {
-    let classNameButtonActive = "myBtn myBtnRow active";
-    let classNameButton = "myBtn myBtnRow";
-    let classNameH1 = "text-white fs-2";
-
-    if(isLight === true) {
-        classNameButtonActive = "myBtn myBtnRow active lightVersion";
-        classNameButton = "myBtn myBtnRow lightVersion";    
-        classNameH1 = "fs-2 lightVersion";
-    }
-
-    function handleClick(newState:"all" | "active" | "inactive") {
-        setFilter(newState);
-    }
-
     const [windowSize, setWindowSize] = useState(window.innerWidth);
     
     useEffect(() => {
@@ -31,10 +17,25 @@ function Extensions({ isLight, filter, setFilter }: ExtensionsProps) {
         window.addEventListener("resize", handleResize);
     }, []);
 
+    // Default class values
+    let classNameButtonActive = "myBtn myBtnRow active";
+    let classNameButton = "myBtn myBtnRow";
+    let classNameH1 = "text-white fs-2";
     let classNameDiv = "d-flex justify-content-between mt-5 mb-4";
+
+    if(isLight === true) {
+        classNameButtonActive = "myBtn myBtnRow active lightVersion";
+        classNameButton = "myBtn myBtnRow lightVersion";    
+        classNameH1 = "fs-2 lightVersion";
+    }
 
     if(windowSize < 768) {
         classNameDiv = "d-flex justify-content-center align-items-center flex-column my-4";
+    }
+
+    // Filter click handle
+    function handleClick(newState:"all" | "active" | "inactive") {
+        setFilter(newState);
     }
 
     return (
