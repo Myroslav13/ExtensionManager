@@ -45,7 +45,6 @@ function ExtensionList({ isLight, filter }: ExtensionsProps) {
     let classNameToggle = "form-check-input";
     let classNameP = "";
     let classNameRemoveButton = "";
-    let counter = -1;
 
     if(isLight === true) {
         classNameString = "card h-100 rounded-4 border lightVersion";
@@ -57,42 +56,45 @@ function ExtensionList({ isLight, filter }: ExtensionsProps) {
     return (
         <div className="container text-center mt-2">
             <div className="row">
-                {data.map((el, index) => { 
-                    let marginClass = "me-2"; 
-                    
-                    // Checking display filter
-                    if (!(((filter === "active") && el.isActive) || ((filter === "inactive") && !el.isActive) || (filter === "all"))) return null;
-                    
-                    counter++;
+                {(() => {
+                    let counter = -1;
 
-                    // Checking window width
-                    if (((counter + 1) % 3 === 0) && (window.innerWidth > 999)) marginClass = "";
+                    return data.map((el, index) => {
+                        // Filter check
+                        if ((filter === "active" && !el.isActive) || (filter === "inactive" && el.isActive)) {
+                            return null;
+                        }
 
-                    if (((counter + 1) % 2 === 0) && ((window.innerWidth > 768) && (window.innerWidth <= 999))) marginClass = "";
+                        counter++;
 
-                    if (window.innerWidth < 768) marginClass = "";      
-                    
-                    return (
-                        <div key={index} className={"col-md-6 col-lg-4 mb-3 p-0"}>
-                            <div className={`${classNameString} ${marginClass}`}>
-                                <div className="d-flex align-items-start p-3">
-                                    <img src={el.logo} className="card-img-top w-25" alt="logo" />
-                                    <div className="card-body text-start pt-0">
-                                        <h5 className="card-title">{el.name}</h5>
-                                        <p className={classNameP}>{el.description}</p>
+                        let marginClass = "me-2";
+                        if (((counter + 1) % 3 === 0) && windowSize > 999) marginClass = "";
+                        if (((counter + 1) % 2 === 0) && windowSize > 768 && windowSize <= 999) marginClass = "";
+                        if (windowSize < 768) marginClass = "";
+
+                        return (
+                            <div key={el.name} className="col-md-6 col-lg-4 mb-3 p-0">
+                                <div className={`${classNameString} ${marginClass}`}>
+                                    <div className="d-flex align-items-start p-3">
+                                        <img src={el.logo} className="card-img-top w-25" alt="logo" />
+                                        <div className="card-body text-start pt-0">
+                                            <h5 className="card-title">{el.name}</h5>
+                                            <p className={classNameP}>{el.description}</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="card-footer bg-transparent border-0 mt-auto d-flex align-items-center justify-content-between pb-3">   
-                                    <button type="button" className={classNameRemoveButton} onClick={() => handleRemoveClick(index)}>Remove</button>
 
-                                    <div className="form-check form-switch">
-                                        <input className={classNameToggle} type="checkbox" id="flexSwitchCheckDefault" defaultChecked={el.isActive} onClick={() => handleToggleClick(index, el.isActive)}/>
+                                    <div className="card-footer bg-transparent border-0 mt-auto d-flex align-items-center justify-content-between pb-3">
+                                        <button type="button" className={classNameRemoveButton} onClick={() => handleRemoveClick(index)}>Remove</button>
+
+                                        <div className="form-check form-switch">
+                                            <input className={classNameToggle} type="checkbox" id={`flexSwitchCheckDefault-${index}`} defaultChecked={el.isActive} onClick={() => handleToggleClick(index, el.isActive)} />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    );
-                })}
+                        );
+                    });
+                })()}
             </div>
         </div>
     );
